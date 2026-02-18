@@ -5,6 +5,7 @@ A fun Mario-like platform game where you navigate through an electronics circuit
 ## 🎯 Game Features
 
 - **Electronics-themed gameplay**: Navigate through a world made of resistors, capacitors, inductors, and lamps
+- **Algorithmically generated chip tune music**: Retro-style background music created with Web Audio API
 - **Platform mechanics**: Jump, run, and explore the circuit board
 - **Special interactions**:
   - Jump over capacitor gaps (the space between plates)
@@ -18,6 +19,7 @@ A fun Mario-like platform game where you navigate through an electronics circuit
 - **Arrow Keys** or **A/D**: Move left and right
 - **Space** or **W** or **Up Arrow**: Jump
 - **Restart Button**: Restart the game
+- **Music Button**: Toggle background music on/off
 
 ## 🚀 Play the Game
 
@@ -27,6 +29,7 @@ You can play the game directly by opening `index.html` in your web browser, or v
 
 - Built with pure HTML5, CSS3, and JavaScript
 - Uses Canvas API for rendering
+- Algorithmically generated chip tune music using Web Audio API
 - No external dependencies or frameworks required
 - Responsive design with mobile-friendly layout
 
@@ -57,6 +60,7 @@ To deploy this game to GitHub Pages:
 ├── index.html    # Main HTML file
 ├── style.css     # Styling and layout
 ├── game.js       # Game logic and physics
+├── music.js      # Chip tune music generator
 └── README.md     # This file
 ```
 

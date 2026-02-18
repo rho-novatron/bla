@@ -53,9 +53,11 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-#restartBtn {
+#restartBtn, .music-btn {
     background: #3498db;
     color: white;
     border: none;
@@ -67,12 +69,20 @@ h1 {
     transition: background 0.3s;
 }
 
-#restartBtn:hover {
+#restartBtn:hover, .music-btn:hover {
     background: #2980b9;
 }
 
-#restartBtn:active {
+#restartBtn:active, .music-btn:active {
     transform: scale(0.98);
+}
+
+.music-btn.playing {
+    background: #2ecc71;
+}
+
+.music-btn.playing:hover {
+    background: #27ae60;
 }
 
 .score {

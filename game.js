@@ -3,6 +3,18 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const restartBtn = document.getElementById('restartBtn');
+const musicBtn = document.getElementById('musicBtn');
+
+// Initialize music player
+let musicPlayer = null;
+let musicEnabled = false;
+
+// Initialize music when available
+window.addEventListener('load', () => {
+    if (window.ChipTunePlayer) {
+        musicPlayer = new ChipTunePlayer();
+    }
+});
 
 // Game Constants
 const GRAVITY = 0.6;
@@ -473,6 +485,21 @@ document.addEventListener('keyup', (e) => {
 restartBtn.addEventListener('click', () => {
     initGame();
     gameLoop();
+});
+
+musicBtn.addEventListener('click', () => {
+    if (musicPlayer) {
+        musicPlayer.toggle();
+        musicEnabled = !musicEnabled;
+        
+        if (musicEnabled) {
+            musicBtn.textContent = '🔊 Music On';
+            musicBtn.classList.add('playing');
+        } else {
+            musicBtn.textContent = '🔇 Music Off';
+            musicBtn.classList.remove('playing');
+        }
+    }
 });
 
 // Start Game
