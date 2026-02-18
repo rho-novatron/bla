@@ -53,9 +53,9 @@ class ChipTunePlayer {
     // Create a square wave oscillator (classic chip tune sound)
     createSquareWave(frequency, startTime, duration, volume = 0.3) {
         // Ensure startTime is valid
-        if (!startTime || startTime < this.audioContext.currentTime) {
-            startTime = this.audioContext.currentTime;
-        }
+        const scheduleTime = (!startTime || startTime < this.audioContext.currentTime) 
+            ? this.audioContext.currentTime 
+            : startTime;
         
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
@@ -65,17 +65,17 @@ class ChipTunePlayer {
         
         // ADSR envelope (Attack, Decay, Sustain, Release)
         gainNode.gain.value = 0;
-        gainNode.gain.setValueAtTime(0, startTime);
-        gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.01); // Attack
-        gainNode.gain.linearRampToValueAtTime(volume * 0.7, startTime + 0.05); // Decay
-        gainNode.gain.setValueAtTime(volume * 0.7, startTime + duration - 0.05); // Sustain
-        gainNode.gain.linearRampToValueAtTime(0, startTime + duration); // Release
+        gainNode.gain.setValueAtTime(0, scheduleTime);
+        gainNode.gain.linearRampToValueAtTime(volume, scheduleTime + 0.01); // Attack
+        gainNode.gain.linearRampToValueAtTime(volume * 0.7, scheduleTime + 0.05); // Decay
+        gainNode.gain.setValueAtTime(volume * 0.7, scheduleTime + duration - 0.05); // Sustain
+        gainNode.gain.linearRampToValueAtTime(0, scheduleTime + duration); // Release
         
         oscillator.connect(gainNode);
         gainNode.connect(this.masterGain);
         
-        oscillator.start(startTime);
-        oscillator.stop(startTime + duration);
+        oscillator.start(scheduleTime);
+        oscillator.stop(scheduleTime + duration);
         
         return oscillator;
     }
@@ -83,9 +83,9 @@ class ChipTunePlayer {
     // Create a triangle wave (softer sound for bass)
     createTriangleWave(frequency, startTime, duration, volume = 0.2) {
         // Ensure startTime is valid
-        if (!startTime || startTime < this.audioContext.currentTime) {
-            startTime = this.audioContext.currentTime;
-        }
+        const scheduleTime = (!startTime || startTime < this.audioContext.currentTime) 
+            ? this.audioContext.currentTime 
+            : startTime;
         
         const oscillator = this.audioContext.createOscillator();
         const gainNode = this.audioContext.createGain();
@@ -94,16 +94,16 @@ class ChipTunePlayer {
         oscillator.frequency.value = frequency;
         
         gainNode.gain.value = 0;
-        gainNode.gain.setValueAtTime(0, startTime);
-        gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.01);
-        gainNode.gain.setValueAtTime(volume, startTime + duration - 0.05);
-        gainNode.gain.linearRampToValueAtTime(0, startTime + duration);
+        gainNode.gain.setValueAtTime(0, scheduleTime);
+        gainNode.gain.linearRampToValueAtTime(volume, scheduleTime + 0.01);
+        gainNode.gain.setValueAtTime(volume, scheduleTime + duration - 0.05);
+        gainNode.gain.linearRampToValueAtTime(0, scheduleTime + duration);
         
         oscillator.connect(gainNode);
         gainNode.connect(this.masterGain);
         
-        oscillator.start(startTime);
-        oscillator.stop(startTime + duration);
+        oscillator.start(scheduleTime);
+        oscillator.stop(scheduleTime + duration);
         
         return oscillator;
     }
